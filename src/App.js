@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import Button from './components/button';
-import DateField from './components/dateField';
-import Label from './components/label'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import SingleQuotation from './components/singleQuotation';
+import PeriodQuotation from './components/periodQuotation';
 import './App.css';
-import axios from 'axios'
-
-
-
 
 
 class App extends Component {
@@ -16,63 +11,44 @@ class App extends Component {
     super(props);
 
     this.state = {
-      initialDate: "",
-      finalDate: "",
-      quotation: []
+      page: "periodDay"
     };
 
-    this.getQuotation = this.getQuotation.bind(this)
-    this.handleChange = this.handleChange.bind(this)
   }
 
   formatDate = function (date) {
     var day = date.getDate()
     var month = date.getMonth() + 1
     var year = date.getFullYear()
-    
+
     if(day < 10) {
         day = '0' + day
     } 
-    
+
     if(month < 10) {
         month = '0' + month
     } 
-  
+
     return day + "-" + month + "-" + year
-}
-
-  getQuotation () {
-    console.log(this.state)
-    console.log(this.state["initialDate"])
-    if(this.state["initialDate"] !== "") {
-      var dateSplitted = this.formatDate(this.state["initialDate"]).split('-')
-      console.log(dateSplitted)
-      axios.get('http://localhost:8080/quotation-day/?day='+ dateSplitted[0] + '&month=' + dateSplitted[1] +'&year=' + dateSplitted[2])
-          .then(response => this.setState({ quotation: response.data }));
-
-    }
   }
-  
-  handleChange = function (event, date) {
-    this.setState({initialDate: date})
-  }
+
   
   render() {
- 
-    let label
-    if (this.state["quotation"].date !== undefined) {
-      label = <Label text={"Valor do EURO em " + this.state["quotation"].date + " é " + this.state["quotation"].real}/>
+    
+    let page
+    
+    if(this.state["page"] === "singleDay") {
+      page =  <SingleQuotation formatDate={this.formatDate} />
+
     } else {
-      label = undefined
+      page = <PeriodQuotation formatDate={this.formatDate} />
     }
+ 
     return (
       <MuiThemeProvider>
-      <div> 
-        <DateField text="Data: " value={this.state.initialDate} onChange={this.handleChange}/>
-        <Button handleClick={this.getQuotation} label="Pesquisar" />
-        {label}
-      </div>
-        </MuiThemeProvider>
+        {page}
+      </MuiThemeProvider>
+
     ); 
   }
 }
