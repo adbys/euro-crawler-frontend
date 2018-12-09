@@ -29,7 +29,7 @@ class SingleQuotation extends Component {
         if(this.state["date"] !== undefined) {
             var dateSplitted = this.formatDate(this.state["date"]).split('-')
             console.log(dateSplitted)
-            axios.get('http://localhost:8080/quotation-day/?day='+ dateSplitted[0] + '&month=' + dateSplitted[1] +'&year=' + dateSplitted[2])
+            axios.get('http://142.93.249.9:8080/quotation-day/?day='+ dateSplitted[0] + '&month=' + dateSplitted[1] +'&year=' + dateSplitted[2])
                 .then(response => this.setState({ quotation: response.data }));
 
         }
