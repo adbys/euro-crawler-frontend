@@ -16,8 +16,7 @@ class SingleQuotation extends Component {
 
         this.state = {
             date: undefined,
-            quotation: [],
-            page: "singleDay"
+            quotation: []
         };
 
         this.getQuotation = this.getQuotation.bind(this)
@@ -74,7 +73,6 @@ class SingleQuotation extends Component {
                         <h2>Checar Cotação Euro em um Único Dia</h2>
                         <DateField name="date" text="Data: " value={this.state.date} onChange={this.handleChange}/>
                         <Button handleClick={this.getQuotation} label="Pesquisar" />
-                        
                         <Grid container key="label" justify="center">
                             {label}
                         </Grid>

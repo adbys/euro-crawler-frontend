@@ -29,7 +29,7 @@ class PeriodQuotation extends Component {
         this.chart = undefined
         if(this.state["initialDate"] !== undefined && this.state["finalDate"] !== undefined) {
             console.log(this.state["quotations"])
-            axios.get('http://localhost:8080/quotation-period/?iniDay='+ this.formatDate(this.state["initialDate"]) 
+            axios.get('http://142.93.249.9:8080/quotation-period/?iniDay='+ this.formatDate(this.state["initialDate"]) 
             + '&finDay=' + this.formatDate(this.state["finalDate"]))
                 .then(response => {
                     var labels = []
@@ -88,10 +88,7 @@ class PeriodQuotation extends Component {
         if (this.state["chartData"] !== undefined) {
             console.log(this.state["chartData"])
         chart = <Grid container key="chart" justify="center">
-                 <h2>Cotação Euro</h2>
-                 <br/>
-                 <br/>
-                 <Chart chartData={this.state["chartData"]} /> 
+                    <Chart title="Cotação do Euro (EUR)" chartData={this.state["chartData"]} /> 
                  </Grid>
         }
 
@@ -107,9 +104,7 @@ class PeriodQuotation extends Component {
                             <DateField name='date-id1' text="Data Inicial: " value={this.state.initialDate} onChange={this.handleChangeInitialDate}/>
                             <DateField name='date-id2' text="Data Final: " value={this.state.finalDate} onChange={this.handleChangeFinalDate}/>
                             <Button handleClick={this.getQuotation} label="Pesquisar" />
-                            
-                                {chart}
-                
+                            {chart}
                         </Grid>
                     </Grid>
                 </Grid>

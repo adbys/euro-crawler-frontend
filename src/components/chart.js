@@ -6,6 +6,7 @@ class Chart extends Component {
     render () {
         return (
             <div>
+                <h2 center>{this.props.title}</h2>
                 <Line
                     data={this.props.chartData}
                     width={800}
