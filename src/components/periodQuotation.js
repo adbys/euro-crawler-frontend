@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Button from './button';
+import Button from './myButton';
 import DateField from './dateField';
 import Chart from './chart'
+import Grid from '@material-ui/core/Grid';
 
 import axios from 'axios'
 
@@ -43,7 +44,7 @@ class PeriodQuotation extends Component {
                             {
                                 label: "Valor em reais (R$)",
                                 data: values,
-                                backgroundColor: ['rgba(255, 99, 132, 0.6)']
+                                backgroundColor: ['rgb(0, 188, 212)']
                             }
                         ]
 
@@ -78,11 +79,18 @@ class PeriodQuotation extends Component {
 
         return (
             <div>
-                <DateField text="Data Inicial: " value={this.state.initialDate} onChange={this.handleChangeInitialDate}/>
-                <DateField text="Data Final: " value={this.state.finalDate} onChange={this.handleChangeFinalDate}/>
-                <Button handleClick={this.getQuotation} label="Pesquisar" />
-                <br></br>
-                {chart}
+                <Grid container className="date-field" spacing={16}>
+                    <Grid item xs={12}>
+                        <Grid container key="initial" justify="center">
+                            <h2>Checar Cotação Euro em um Período de Dias</h2>
+                            <DateField name='date-id1' text="Data Inicial: " value={this.state.initialDate} onChange={this.handleChangeInitialDate}/>
+                            <DateField name='date-id2' text="Data Final: " value={this.state.finalDate} onChange={this.handleChangeFinalDate}/>
+                            <Button handleClick={this.getQuotation} label="Pesquisar" />
+                            <br></br>
+                            {chart}
+                        </Grid>
+                    </Grid>
+                </Grid>
             </div>
         ); 
     } 

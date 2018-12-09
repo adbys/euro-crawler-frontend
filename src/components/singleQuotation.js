@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Button from './button';
+import Button from './myButton';
 import DateField from './dateField';
 import Label from './label'
+import Grid from '@material-ui/core/Grid';
 
 import axios from 'axios'
 
@@ -46,9 +47,16 @@ class SingleQuotation extends Component {
         }
         return (
         <div>
-            <DateField text="Data: " value={this.state.initialDate} onChange={this.handleChange}/>
-            <Button handleClick={this.getQuotation} label="Pesquisar" />
-            {label}
+            <Grid container className="date-field" spacing={16}>
+                <Grid item xs={12}>
+                    <Grid container key="initial" justify="center">
+                        <h2>Checar Cotação Euro em um Único Dia</h2>
+                        <DateField name="date" text="Data: " value={this.state.date} onChange={this.handleChange}/>
+                        <Button handleClick={this.getQuotation} label="Pesquisar" />
+                        {label}
+                    </Grid>
+                </Grid>
+            </Grid>
         </div>
         ); 
     } 
