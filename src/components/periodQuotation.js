@@ -29,10 +29,8 @@ class PeriodQuotation extends Component {
         this.chart = undefined
         if(this.state["initialDate"] !== undefined && this.state["finalDate"] !== undefined) {
             console.log(this.state["quotations"])
-            var initialDateSplitted = this.formatDate(this.state["initialDate"]).split('-')
-            var finalDateSplitted = this.formatDate(this.state["finalDate"]).split('-')
-            axios.get('http://142.93.249.9:8080/quotation-period/?iniDay='+ initialDateSplitted[0] + '&iniMonth=' + initialDateSplitted[1] +'&iniYear=' + initialDateSplitted[2] 
-            + '&finDay=' + finalDateSplitted[0] + '&finMonth=' + finalDateSplitted[1] +'&finYear=' + finalDateSplitted[2])
+            axios.get('http://localhost:8080/quotation-period/?iniDay='+ this.formatDate(this.state["initialDate"]) 
+            + '&finDay=' + this.formatDate(this.state["finalDate"]))
                 .then(response => {
                     var labels = []
                     var values = []

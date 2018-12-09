@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import SingleQuotation from './components/singleQuotation';
 import PeriodQuotation from './components/periodQuotation';
 import NavBar from './components/navBar';
@@ -36,8 +35,6 @@ class App extends Component {
         <NavBar changePage={this.changePage}></NavBar>
         <SingleQuotation formatDate={this.formatDate} />
         <PeriodQuotation formatDate={this.formatDate} />
-      
-       
       </div>
 
     ); 
