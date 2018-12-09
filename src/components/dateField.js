@@ -2,25 +2,20 @@ import React, { Component } from 'react';
 import Label from './label';
 import Input from './input';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 
-const styleLabel = {
-    "padding-right": "5px"
-}
-
-
-const styleInput = {
-    "padding-left": "5px"
-}
 class DateField extends Component {
     
     render () {
          return (
-            <Grid container className="date-field" spacing={16}>
+             <Grid container className="date-field" spacing={16}>
                 <Grid item xs={12}>
-                    <Grid container key="initial" justify="center">
-                        <Label style={styleLabel} text={this.props.text}/>
-                        <Input style={styleInput} name={this.props.name} value={this.props.value} onChange={this.props.onChange}/>
-                    </Grid>
+                    <Paper style={{width: "100%", height: "60px", margin: "10px auto", textAlign: "center"}} elevation={1}>
+                        <Grid container key="initial" justify="center" style={{alignItems: "center"}}>
+                            <Label style={{paddingRight: "0.5rem"}} text={this.props.text}/>
+                            <Input style={{paddingLeft: "0.5rem", textAlign: "center"}} name={this.props.name} value={this.props.value} onChange={this.props.onChange}/>
+                        </Grid>
+                    </Paper>
                 </Grid>
             </Grid>
         );

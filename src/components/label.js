@@ -4,7 +4,7 @@ class Label extends Component {
     render () {
          return (
         <div>
-            <h3>
+            <h3 style={this.props.style}>
                 {this.props.text}
             </h3>
         </div>
