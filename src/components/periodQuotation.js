@@ -3,6 +3,7 @@ import Button from './myButton';
 import DateField from './dateField';
 import Chart from './chart'
 import Grid from '@material-ui/core/Grid';
+import NavBar from './navBar';
 
 import axios from 'axios'
 
@@ -25,10 +26,11 @@ class PeriodQuotation extends Component {
 
 
     getQuotation () {
+        this.chart = undefined
         if(this.state["initialDate"] !== undefined && this.state["finalDate"] !== undefined) {
             console.log(this.state["quotations"])
-            var initialDateSplitted = this.props.formatDate(this.state["initialDate"]).split('-')
-            var finalDateSplitted = this.props.formatDate(this.state["finalDate"]).split('-')
+            var initialDateSplitted = this.formatDate(this.state["initialDate"]).split('-')
+            var finalDateSplitted = this.formatDate(this.state["finalDate"]).split('-')
             axios.get('http://localhost:8080/quotation-period/?iniDay='+ initialDateSplitted[0] + '&iniMonth=' + initialDateSplitted[1] +'&iniYear=' + initialDateSplitted[2] 
             + '&finDay=' + finalDateSplitted[0] + '&finMonth=' + finalDateSplitted[1] +'&finYear=' + finalDateSplitted[2])
                 .then(response => {
@@ -64,21 +66,42 @@ class PeriodQuotation extends Component {
         this.setState({finalDate: date})
     }
 
+    formatDate = function (date) {
+        var day = date.getDate()
+        var month = date.getMonth() + 1
+        var year = date.getFullYear()
+    
+        if(day < 10) {
+            day = '0' + day
+        } 
+    
+        if(month < 10) {
+            month = '0' + month
+        } 
+    
+        return day + "-" + month + "-" + year
+      }
 
-  
-    render() {
+
+      
+      render() {
+          
         let chart;
-
         if (this.state["chartData"] !== undefined) {
             console.log(this.state["chartData"])
-        chart = <div>
+        chart = <Grid container key="chart" justify="center">
                  <h2>Cotação Euro</h2>
+                 <br/>
+                 <br/>
                  <Chart chartData={this.state["chartData"]} /> 
-                </div>
+                 </Grid>
         }
 
         return (
             <div>
+                <NavBar></NavBar>
+                <br/>
+                <br/>
                 <Grid container className="date-field" spacing={16}>
                     <Grid item xs={12}>
                         <Grid container key="initial" justify="center">
@@ -86,8 +109,9 @@ class PeriodQuotation extends Component {
                             <DateField name='date-id1' text="Data Inicial: " value={this.state.initialDate} onChange={this.handleChangeInitialDate}/>
                             <DateField name='date-id2' text="Data Final: " value={this.state.finalDate} onChange={this.handleChangeFinalDate}/>
                             <Button handleClick={this.getQuotation} label="Pesquisar" />
-                            <br></br>
-                            {chart}
+                            
+                                {chart}
+                
                         </Grid>
                     </Grid>
                 </Grid>

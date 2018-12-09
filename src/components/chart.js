@@ -8,6 +8,8 @@ class Chart extends Component {
             <div>
                 <Line
                     data={this.props.chartData}
+                    width={800}
+	                height={640}
                     option={{
                         title:{
                             display: true,

@@ -8,16 +8,6 @@ import './App.css';
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      page: "singleDay"
-    };
-
-    this.changePage = this.changePage.bind(this);
-  }
-
   formatDate = function (date) {
     var day = date.getDate()
     var month = date.getMonth() + 1
@@ -41,22 +31,13 @@ class App extends Component {
   
   render() {
     
-    let page
-    
-    if(this.state["page"] === "singleDay") {
-      page =  <SingleQuotation formatDate={this.formatDate} />
-    } else {
-      page = <PeriodQuotation formatDate={this.formatDate} />
-    }
- 
     return (
       <div>
         <NavBar changePage={this.changePage}></NavBar>
-        <br/>
-        <br/>
-        <MuiThemeProvider>
-          {page}
-        </MuiThemeProvider>
+        <SingleQuotation formatDate={this.formatDate} />
+        <PeriodQuotation formatDate={this.formatDate} />
+      
+       
       </div>
 
     ); 

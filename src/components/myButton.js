@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton'
-
-const style = {
-    margin: 12,
-    color: "rgb(51, 204, 204) !important"
-  };
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class MyButton extends Component {
     
     render () {
-         return <RaisedButton style={style} onClick={() => {this.props.handleClick(this.props.label)} }>
-             {this.props.label}
-         </RaisedButton>
+         return (
+            <MuiThemeProvider>
+                <RaisedButton onClick={() => {this.props.handleClick(this.props.label)} }>
+                    {this.props.label}
+                </RaisedButton>
+            </MuiThemeProvider>
+         )
     }
 
 }
